@@ -1,0 +1,26 @@
+<?php
+
+
+class LibJulian extends WireData implements Module {
+
+  public static function getModuleInfo() {
+    return array(
+      'title' => 'Julian Calendar Framework',
+      'version' => 90,
+      'summary' => 'Adds auto-loading functionality of Julian classes to your PW install',
+      'singular' => true,
+      'autoload' => true
+      );
+  }
+
+  public function init() {
+    spl_autoload_register(array($this, 'julianLoader'));
+  }
+
+  private function julianLoader(){
+    include_once "julian/Julian.php";
+    include_once "julian/Julian_Day.php";
+    include_once "julian/Julian_Week.php";
+    include_once "julian/Julian_Event.php";
+  }
+}
